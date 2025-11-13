@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 
 type MasterCommandBarProps = {
   onSubmitAction: (prompt: string) => void;
@@ -10,7 +10,7 @@ type MasterCommandBarProps = {
 };
 
 export function MasterCommandBar({ onSubmitAction, isLoading }: MasterCommandBarProps) {
-  const [prompt, setPrompt] = useState("Swap 0.0001 WETH for USDC");
+  const [prompt, setPrompt] = useState("Bridge 1 RUSD to Fuji if ETH is greater than 2000");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -35,7 +35,7 @@ export function useRusdCommandHandler() {
     }
 
     setIsLoading(true);
-    setStatusMessage("Analyzing your command...");
+    setStatusMessage("Analyzing your command and checking conditions...");
 
     try {
       const intentRes = await fetch("/api/rusd-command", {
@@ -45,22 +45,28 @@ export function useRusdCommandHandler() {
       });
 
       const intentData = await intentRes.json();
+      
+      if (intentData.type === "condition_not_met") {
+        setStatusMessage("");
+        alert(intentData.message);
+        return;
+      }
 
       if (intentData.type !== "rusd_swap_intent") {
         throw new Error(intentData.message || "Could not understand the command.");
       }
       
-      const { amount, destinationChainId } = intentData;
-      
+      const { amount, destinationChainId, message: conditionMetMessage } = intentData;
+      setStatusMessage(conditionMetMessage);
+      alert(conditionMetMessage);
+
       if (chainId === destinationChainId) {
           throw new Error("You can't bridge to the same chain you are currently on.");
       }
 
       const destinationChainConfig = SUPPORTED_CHAINS[destinationChainId];
       const destinationRusdAddress = destinationChainConfig?.constants.RUSD_ADDRESS;
-      if (!destinationRusdAddress) {
-        throw new Error("Destination chain is not configured correctly.");
-      }
+      if (!destinationRusdAddress) throw new Error("Destination chain is not configured correctly.");
 
       setStatusMessage("Fetching cross-chain fees...");
       const amountInSmallestUnit = parseUnits(amount, 18);
