@@ -36,7 +36,7 @@ export default function Home() {
             height={40}
             className="rounded-md"
           />
-          <h1 className="text-2xl font-bold">Prompt Fusion Swap</h1>
+          <h1 className="text-2xl font-bold">OmniSwap AI</h1>
         </div>
         <div className="flex items-center gap-4">
           <NetworkSwitcher />
