@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Prompt Fusion Swap",
+  title: "Omni-Swap-AI",
   description:
-    "DeFi terminal that combines real-time portfolio and AI commands",
+    "DeFi terminal",
 };
 
 export default function RootLayout({

@@ -55,7 +55,7 @@ export function useUsdcBridge() {
       }
 
       try {
-        const backend = new ViemChainBackend(address, publicClient, walletClient);
+        const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
         const balanceCall = createBalanceOfCall({
           token: usdcAddress,
           wallet: address,
@@ -97,7 +97,7 @@ export function useUsdcBridge() {
         amount: amountInSmallestUnit,
       });
 
-      const backend = new ViemChainBackend(address, publicClient, walletClient);
+      const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
       const routerClient = new RouterClient({ routerAddress: currentChainConfig.constants.ROUTER_ADDRESS }, backend);
       
       setStatusMessage("Please approve USDC spending...");

@@ -50,6 +50,7 @@ export async function POST(request: Request) {
     if (functionCall?.name === 'bridge_rusd') {
       const { amount, destinationChain } = functionCall.args;
 
+      // @ts-ignore
       const destinationChainId = chainNameToIdMap[destinationChain.toLowerCase()];
 
       if (!destinationChainId) {

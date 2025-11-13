@@ -43,7 +43,7 @@ export function useRusdBridge() {
       return;
     }
     try {
-      const backend = new ViemChainBackend(address, publicClient, walletClient);
+      const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
       const balanceCall = createBalanceOfCall({ token: rusdAddress, wallet: address });
       const balanceResult = await backend.staticCall(balanceCall);
       setRusdBalance(formatUnits(balanceResult, 18));
@@ -65,7 +65,7 @@ export function useRusdBridge() {
     setIsLoading(true);
     setStatusMessage("Minting 1 RUSD...");
     try {
-      const backend = new ViemChainBackend(address, publicClient, walletClient);
+      const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
       const mintCall = createMintCall(rusdAddress);
       const receipt = await backend.sendTransaction(mintCall);
 
@@ -111,7 +111,7 @@ export function useRusdBridge() {
         amount: amountInSmallestUnit,
       });
 
-      const backend = new ViemChainBackend(address, publicClient, walletClient);
+      const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
       const routerClient = new RouterClient({ routerAddress: currentChainConfig.constants.ROUTER_ADDRESS }, backend);
       
       setStatusMessage("Please approve RUSD spending...");

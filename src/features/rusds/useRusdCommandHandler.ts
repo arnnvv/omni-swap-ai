@@ -72,7 +72,7 @@ export function useRusdCommandHandler() {
         amount: amountInSmallestUnit,
       });
 
-      const backend = new ViemChainBackend(address, publicClient, walletClient);
+      const backend = new ViemChainBackend(address, publicClient as any, walletClient as any);
       const routerClient = new RouterClient({ routerAddress: currentChainConfig.constants.ROUTER_ADDRESS }, backend);
       
       setStatusMessage("Please approve RUSD spending in your wallet...");
